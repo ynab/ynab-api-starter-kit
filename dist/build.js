@@ -3283,7 +3283,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-const router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]();
+const router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+  mode: 'history'
+});
 
 // Create our Vue App and replace the <div id="app"></div> with it
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
