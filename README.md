@@ -35,6 +35,9 @@ Copy and paste your client id and redirect URI into the `src/config.json` file.
 
 ## Development
 
+Check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more
+information on how to use the YNAB API.
+
 This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
 to use whatever framework or libraries you prefer.
 
