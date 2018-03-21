@@ -4,17 +4,33 @@
     <div class="container">
 
       <!-- Display a loading message if loading -->
-      <div v-if="loading">
-        <h1>Loading...</h1>
+      <h1 v-if="loading" class="display-4">Loading...</h1>
+
+      <!-- Display an error if we got one -->
+      <div v-if="error">
+        <h1 class="display-4">Oops!</h1>
+        <p class="lead">{{error}}</p>
       </div>
 
+      <!-- Otherwise show our app contents -->
       <div v-else>
 
         <!-- If we dont have a token ask the user to authorize with YNAB -->
         <form v-if="!ynab.token">
+          <h1 class="display-4">Congrats!</h1>
+          <p class="lead">You have successfully started a new YNAB API Application!</p>
+          <ul>
+            <li>Please go to your <a href="https://app.youneedabudget.com/settings/developer" target="_blank" rel="noopener noreferrer">YNAB Developer Settings</a> and create a new OAuth Application.</li>
+            <li>Copy your client ID and redirect URI into <em>src/config.json</em>.</li>
+            <li>Then build your amazing app!</li>
+          </ul>
+          <p>If you have any questions please reach out to us at <mark>[email?]</mark></p>
+          <p>&nbsp;</p>
+
           <div class="form-group">
-            <p>Hello there! If you would like to use this App, please authorize with YNAB!</p>
-            <button @click="authorizeWithYNAB" class="btn btn-primary">Authorize This App With YNAB</button>
+            <h1 class="display-5">Hello!</h1>
+            <p class="lead">If you would like to use this App, please authorize with YNAB!</p>
+            <button @click="authorizeWithYNAB" class="btn btn-primary">Authorize This App With YNAB &gt;</button>
           </div>
         </form>
 
@@ -58,6 +74,7 @@ export default {
         api: null,
       },
       loading: false,
+      error: null,
       budgetId: null,
       budgets: [],
       transactions: [],
@@ -66,6 +83,7 @@ export default {
   // When this component is created, check whether we need to get a token,
   // budgets or display the transactions
   created() {
+    this.ynab.token = this.$route.query.code;
     if (this.ynab.token) {
       this.api = new ynab.api(this.ynab.token);
       if (!this.budgetId) {
@@ -85,9 +103,12 @@ export default {
     },
     // This uses the YNAB API to get a list of budgets
     getBudgets() {
-      this.loading = true
+      this.loading = true;
+      this.error = null;
       this.api.budgets.getBudgets().then((res) => {
         this.budgets = res.data.budgets;
+      }).catch((err) => {
+        this.error = err.error.detail;
       }).finally(() => {
         this.loading = false;
       });
@@ -95,11 +116,13 @@ export default {
     // This selects a budget and gets all the transactions in that budget
     selectBudget(id) {
       this.loading = true;
+      this.error = null;
       this.budgetId = id;
-      this.transactions = []
+      this.transactions = [];
       this.api.transactions.getTransactions(id).then((res) => {
         this.transactions = res.data.transactions;
-        console.log(this.transactions)
+      }).catch((err) => {
+        this.error = err.error.detail;
       }).finally(() => {
         this.loading = false;
       });
