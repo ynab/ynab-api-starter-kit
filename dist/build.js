@@ -486,7 +486,7 @@ process.umask = function() { return 0; };
   // When this component is created, check whether we need to get a token,
   // budgets or display the transactions
   created() {
-    this.ynab.token = this.$route.query.code;
+    this.ynab.token = this.$route.query.token;
     if (this.ynab.token) {
       this.api = new __WEBPACK_IMPORTED_MODULE_0_ynab__["a" /* api */](this.ynab.token);
       if (!this.budgetId) {
@@ -16349,7 +16349,7 @@ module.exports = self.fetch.bind(self);
 /* 25 */
 /***/ (function(module, exports) {
 
-module.exports = {"clientId":"a56948bc5fe6e80c1a241151611a53350518c119ea413de4375694ebebbd68e0","redirectUri":"https://ynab.github.io/ynab-api-starter-kit/#/"}
+module.exports = {"clientId":"a56948bc5fe6e80c1a241151611a53350518c119ea413de4375694ebebbd68e0","redirectUri":"https://ynab.github.io/ynab-api-starter-kit/"}
 
 /***/ }),
 /* 26 */
