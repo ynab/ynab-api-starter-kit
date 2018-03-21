@@ -486,7 +486,7 @@ process.umask = function() { return 0; };
   // When this component is created, check whether we need to get a token,
   // budgets or display the transactions
   created() {
-    this.ynab.token = this.$route.query.token;
+    this.ynab.token = this.$route.query.access_token;
     if (this.ynab.token) {
       this.api = new __WEBPACK_IMPORTED_MODULE_0_ynab__["a" /* api */](this.ynab.token);
       if (!this.budgetId) {

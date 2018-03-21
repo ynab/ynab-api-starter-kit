@@ -83,7 +83,7 @@ export default {
   // When this component is created, check whether we need to get a token,
   // budgets or display the transactions
   created() {
-    this.ynab.token = this.$route.query.token;
+    this.ynab.token = this.$route.query.access_token;
     if (this.ynab.token) {
       this.api = new ynab.api(this.ynab.token);
       if (!this.budgetId) {
