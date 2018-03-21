@@ -3,6 +3,9 @@
 This is an example project to help you get quickly started building your own
 JavaScript application with the YNAB API.
 
+[View a demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project
+will start off looking like.
+
 ## Usage
 
 * Install [Node.js](https://nodejs.org/en/).
