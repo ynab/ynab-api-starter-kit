@@ -1,6 +1,7 @@
 # YNAB API Starter Kit
 
-Want to build a web app with the YNAB API but not sure how to get started?
+Want to build a web app with the [YNAB API](https://api.youneedabudget.com/) but
+not sure how to get started?
 
 Try this YNAB API Starter Kit!
 
