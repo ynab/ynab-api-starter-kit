@@ -10,6 +10,7 @@
       <div v-if="error">
         <h1 class="display-4">Oops!</h1>
         <p class="lead">{{error}}</p>
+        <button class="btn btn-primary" @click="resetToken">Try Again &gt;</button>
       </div>
 
       <!-- Otherwise show our app contents -->
@@ -125,7 +126,7 @@ export default {
     authorizeWithYNAB(e) {
       e.preventDefault();
       const uri = `https://app.youneedabudget.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
-      window.open(uri);
+      location.replace(uri);
     },
     // Method to find a YNAB token
     // First it looks in the location.hash and then localStorage
@@ -146,6 +147,12 @@ export default {
       }
       return token;
     },
+    // Clear the token and start authorization over
+    resetToken() {
+      localStorage.removeItem('ynab_access_token');
+      this.ynab.token = null;
+      this.error = null;
+    }
   },
   // Specify which components we want to make available to our templates
   components: {

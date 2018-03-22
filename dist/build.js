@@ -263,6 +263,7 @@ module.exports = g;
 //
 //
 //
+//
 
 // Hooray! Here comes YNAB!
 
@@ -338,7 +339,7 @@ module.exports = g;
     authorizeWithYNAB(e) {
       e.preventDefault();
       const uri = `https://app.youneedabudget.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
-      window.open(uri);
+      location.replace(uri);
     },
     // Method to find a YNAB token
     // First it looks in the location.hash and then localStorage
@@ -359,6 +360,12 @@ module.exports = g;
       }
       return token;
     },
+    // Clear the token and start authorization over
+    resetToken() {
+      localStorage.removeItem('ynab_access_token');
+      this.ynab.token = null;
+      this.error = null;
+    }
   },
   // Specify which components we want to make available to our templates
   components: {
@@ -14153,7 +14160,16 @@ var render = function() {
             ? _c("div", [
                 _c("h1", { staticClass: "display-4" }, [_vm._v("Oops!")]),
                 _vm._v(" "),
-                _c("p", { staticClass: "lead" }, [_vm._v(_vm._s(_vm.error))])
+                _c("p", { staticClass: "lead" }, [_vm._v(_vm._s(_vm.error))]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: { click: _vm.resetToken }
+                  },
+                  [_vm._v("Try Again >")]
+                )
               ])
             : _c(
                 "div",
