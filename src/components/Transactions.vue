@@ -6,8 +6,8 @@
       <tr>
         <th>Account ID</th>
         <th>Date</th>
-        <th>Payee ID</th>
-        <th>Category ID</th>
+        <th>Payee</th>
+        <th>Category</th>
         <th>Memo</th>
         <th>Amount</th>
       </tr>
@@ -16,8 +16,8 @@
       <tr v-for="transaction in transactions">
         <td>{{transaction.account_id}}</td>
         <td>{{transaction.date}}</td>
-        <td>{{transaction.payee_id}}</td>
-        <td>{{transaction.category_id}}</td>
+        <td>{{transaction.payee_name}}</td>
+        <td>{{transaction.category_name}}</td>
         <td>{{transaction.memo}}</td>
         <td>{{convertMilliUnitsToCurrencyAmount(transaction.amount)}}</td>
       </tr>
