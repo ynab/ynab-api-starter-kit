@@ -41,6 +41,9 @@ information on how to use the YNAB API.
 This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
 to use whatever framework or libraries you prefer.
 
+To build the production assets for deployment, run the command: `npm run build`.
+This will build the asset to `dist/build.js` which the `index.html` will load.
+
 ### `src/App.vue`
 
 In the script portion of this page, you can see how to build an OAuth URI to
@@ -60,5 +63,6 @@ YNAB uses into the currency format of the budget.
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 
-* Github Pages
-* Firebase
+### GitHub Pages
+If you have a GitHub account, fork this repo. You can now modify your fork, run
+`npm run build`, commit and push the code. Your app will be live on `https://[yourgithubacccount].github.io/ynab-api-starter-kit/`.
