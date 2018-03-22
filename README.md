@@ -41,8 +41,12 @@ information on how to use the YNAB API.
 This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
 to use whatever framework or libraries you prefer.
 
-To build the production assets for deployment, run the command: `npm run build`.
-This will build the asset to `dist/build.js` which the `index.html` will load.
+### `npm start`
+Runs the development server (defaults to `localhost:8080`) and watches for changes.
+
+### `npm run build`
+Builds the production assets for deployment. This will build to `dist/build.js`
+which the `index.html` will load.
 
 ### `src/App.vue`
 
