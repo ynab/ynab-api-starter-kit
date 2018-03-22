@@ -61,7 +61,7 @@ obtain an access token for the API.
 
 It also has some examples on retrieving budgets and transactions.
 
-### [`src/Transactions.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/Transactions.vue)
+### [`src/Transactions.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/components/Transactions.vue)
 
 This displays all the transactions when you've got them. It also has an example
 of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that
