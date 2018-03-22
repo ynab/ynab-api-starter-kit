@@ -129,7 +129,7 @@ export default {
       location.replace(uri);
     },
     // Method to find a YNAB token
-    // First it looks in the location.hash and then localStorage
+    // First it looks in the location.hash and then sessionStorage
     findYNABToken() {
       let token = null;
       const search = window.location.hash.substring(1).replace(/&/g, '","').replace(/=/g,'":"');
@@ -139,17 +139,17 @@ export default {
           return key === '' ? value : decodeURIComponent(value);
         });
         token = params.access_token;
-        localStorage.setItem('ynab_access_token', token);
+        sessionStorage.setItem('ynab_access_token', token);
         window.location.hash = '';
       } else {
-        // Otherwise try localStorage
-        token = localStorage.getItem('ynab_access_token');
+        // Otherwise try sessionStorage
+        token = sessionStorage.getItem('ynab_access_token');
       }
       return token;
     },
     // Clear the token and start authorization over
     resetToken() {
-      localStorage.removeItem('ynab_access_token');
+      sessionStorage.removeItem('ynab_access_token');
       this.ynab.token = null;
       this.error = null;
     }
