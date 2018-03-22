@@ -56,6 +56,9 @@ YNAB uses into the currency format of the budget.
 
 ## Deployment
 
+<a href="https://heroku.com/deploy?template=https://github.com/ynab/ynab-api-starter-kit">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
 * Github Pages
-* Heroku Fork
 * Firebase
