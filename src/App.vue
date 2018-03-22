@@ -83,7 +83,7 @@ export default {
   // When this component is created, check whether we need to get a token,
   // budgets or display the transactions
   created() {
-    this.ynab.token = this.$route.query.access_token;
+    this.ynab.token = this.findYNABToken();
     if (this.ynab.token) {
       this.api = new ynab.api(this.ynab.token);
       if (!this.budgetId) {
@@ -94,13 +94,6 @@ export default {
     }
   },
   methods: {
-    // This builds a URI to get an access token from YNAB
-    // https://api.youneedabudget.com/#outh-applications
-    authorizeWithYNAB(e) {
-      e.preventDefault();
-      const uri = `https://app.youneedabudget.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
-      window.open(uri);
-    },
     // This uses the YNAB API to get a list of budgets
     getBudgets() {
       this.loading = true;
@@ -126,6 +119,32 @@ export default {
       }).finally(() => {
         this.loading = false;
       });
+    },
+    // This builds a URI to get an access token from YNAB
+    // https://api.youneedabudget.com/#outh-applications
+    authorizeWithYNAB(e) {
+      e.preventDefault();
+      const uri = `https://app.youneedabudget.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
+      window.open(uri);
+    },
+    // Method to find a YNAB token
+    // First it looks in the location.hash and then localStorage
+    findYNABToken() {
+      let token = null;
+      const search = window.location.hash.substring(1).replace(/&/g, '","').replace(/=/g,'":"');
+      if (search && search !== '') {
+        // Try to get access_token from the hash returned by OAuth
+        const params = JSON.parse('{"' + search + '"}', function(key, value) {
+          return key === '' ? value : decodeURIComponent(value);
+        });
+        token = params.access_token;
+        localStorage.setItem('ynab_access_token', token);
+        window.location.hash = '';
+      } else {
+        // Otherwise try localStorage
+        token = localStorage.getItem('ynab_access_token');
+      }
+      return token;
     },
   },
   // Specify which components we want to make available to our templates
