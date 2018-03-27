@@ -19,7 +19,7 @@
         <td>{{transaction.payee_name}}</td>
         <td>{{transaction.category_name}}</td>
         <td>{{transaction.memo}}</td>
-        <td>{{convertMilliUnitsToCurrencyAmount(transaction.amount)}}</td>
+        <td>{{convertMilliUnitsToCurrencyAmount(transaction.amount).toFixed(2)}}</td>
       </tr>
     </tbody>
     </table>
