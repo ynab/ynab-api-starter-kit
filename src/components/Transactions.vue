@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="transaction in transactions">
+      <tr v-for="transaction in transactions" v-bind:key="transaction.id">
         <td>{{transaction.account_name}}</td>
         <td>{{transaction.date}}</td>
         <td>{{transaction.payee_name}}</td>
