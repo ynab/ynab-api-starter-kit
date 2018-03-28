@@ -25,7 +25,7 @@
             <li>Copy your client ID and redirect URI into <em>src/config.json</em>.</li>
             <li>Then build your amazing app!</li>
           </ul>
-          <p>If you have any questions please reach out to us at <mark>[email?]</mark></p>
+          <p>If you have any questions please reach out to us at <strong>api@youneedabudget.com</strong>.</p>
           <p>&nbsp;</p>
 
           <div class="form-group">
