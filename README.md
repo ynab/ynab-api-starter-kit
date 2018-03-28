@@ -10,7 +10,7 @@ Try this YNAB API Starter Kit!
 [View a demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project
 will start off looking like.
 
-![kapture 2018-03-22 at 17 34 05](https://user-images.githubusercontent.com/759811/37802159-425ced5a-2df7-11e8-8f9d-cc03329c7b8c.gif)
+![kapture 2018-03-28 at 12 37 23](https://user-images.githubusercontent.com/759811/38046244-c9806f0a-3284-11e8-8788-509912ec79c2.gif)
 
 ## Usage
 
