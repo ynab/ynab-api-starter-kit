@@ -14076,8 +14076,8 @@ var render = function() {
       _c(
         "tbody",
         _vm._l(_vm.transactions, function(transaction) {
-          return _c("tr", [
-            _c("td", [_vm._v(_vm._s(transaction.account_id))]),
+          return _c("tr", { key: transaction.id }, [
+            _c("td", [_vm._v(_vm._s(transaction.account_name))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(transaction.date))]),
             _vm._v(" "),
@@ -14090,7 +14090,9 @@ var render = function() {
             _c("td", [
               _vm._v(
                 _vm._s(
-                  _vm.convertMilliUnitsToCurrencyAmount(transaction.amount)
+                  _vm
+                    .convertMilliUnitsToCurrencyAmount(transaction.amount)
+                    .toFixed(2)
                 )
               )
             ])
@@ -14107,7 +14109,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Account ID")]),
+        _c("th", [_vm._v("Account")]),
         _vm._v(" "),
         _c("th", [_vm._v("Date")]),
         _vm._v(" "),
@@ -14291,7 +14293,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", [
       _vm._v("If you have any questions please reach out to us at "),
-      _c("mark", [_vm._v("[email?]")])
+      _c("strong", [_vm._v("api@youneedabudget.com")]),
+      _vm._v(".")
     ])
   }
 ]
