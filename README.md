@@ -15,7 +15,7 @@ will start off looking like.
 ## Usage
 
 * Install [Node.js](https://nodejs.org/).
-* Run `npx ynab-api-starter-kit my-ynab-app`
+* In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
 
 This will:
 * Create a copy of this project on your computer.
