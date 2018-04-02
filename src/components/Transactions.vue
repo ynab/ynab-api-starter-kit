@@ -4,7 +4,7 @@
     <table class="table">
     <thead>
       <tr>
-        <th>Account ID</th>
+        <th>Account</th>
         <th>Date</th>
         <th>Payee</th>
         <th>Category</th>
@@ -13,13 +13,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="transaction in transactions">
-        <td>{{transaction.account_id}}</td>
+      <tr v-for="transaction in transactions" v-bind:key="transaction.id">
+        <td>{{transaction.account_name}}</td>
         <td>{{transaction.date}}</td>
         <td>{{transaction.payee_name}}</td>
         <td>{{transaction.category_name}}</td>
         <td>{{transaction.memo}}</td>
-        <td>{{convertMilliUnitsToCurrencyAmount(transaction.amount)}}</td>
+        <td>{{convertMilliUnitsToCurrencyAmount(transaction.amount).toFixed(2)}}</td>
       </tr>
     </tbody>
     </table>
