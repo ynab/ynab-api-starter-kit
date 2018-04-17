@@ -5,7 +5,7 @@
   "bin": "bin/start.js",
   "scripts": {
     "start": "webpack-dev-server --open --hot",
-    "build": "webpack --progress --hide-modules"
+    "build": "NODE_ENV='production' webpack --progress --hide-modules"
   },
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
