@@ -7,8 +7,8 @@ Try this YNAB API Starter Kit!
 
 ## Demo
 
-[View a demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project
-will start off looking like.
+View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project
+will start off looking like or take a look below.
 
 ![kapture 2018-03-28 at 12 37 23](https://user-images.githubusercontent.com/759811/38046244-c9806f0a-3284-11e8-8788-509912ec79c2.gif)
 
