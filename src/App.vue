@@ -29,7 +29,7 @@
           <p>&nbsp;</p>
 
           <div class="form-group">
-            <h1 class="display-5">Hello!</h1>
+            <h2>Hello!</h2>
             <p class="lead">If you would like to use this App, please authorize with YNAB!</p>
             <button @click="authorizeWithYNAB" class="btn btn-primary">Authorize This App With YNAB &gt;</button>
           </div>
