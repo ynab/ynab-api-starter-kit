@@ -9,20 +9,20 @@
   },
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
-  "dependencies": {
-    "chalk": "^2.3.2",
-    "cpr": "^3.0.1",
-    "vue": "2.5.15",
-    "vue-server-renderer": "2.5.15",
-    "xhr": "^2.4.1",
-    "ynab": "^0.15.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "css-loader": "^0.28.11",
-    "vue-loader": "^14.2.1",
-    "vue-template-compiler": "2.5.15",
-    "webpack": "^3.11.0",
-    "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^2.9.1"
+    "chalk": "^2.4.1",
+    "cpr": "^3.0.1",
+    "css-loader": "^1.0.0",
+    "npm-check-updates": "^2.14.2",
+    "vue": "2.5.16",
+    "vue-loader": "^15.2.4",
+    "vue-server-renderer": "2.5.16",
+    "vue-template-compiler": "2.5.16",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "xhr": "^2.5.0",
+    "ynab": "^1.1.0"
   }
 }
