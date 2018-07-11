@@ -9,10 +9,11 @@
   },
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "chalk": "^2.4.1",
     "cpr": "^3.0.1",
+  },
+  "devDependencies": {
     "css-loader": "^1.0.0",
     "npm-check-updates": "^2.14.2",
     "vue": "2.5.16",
