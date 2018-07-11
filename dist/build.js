@@ -264,6 +264,10 @@ module.exports = g;
 //
 //
 //
+//
+//
+//
+//
 
 // Hooray! Here comes YNAB!
 
@@ -490,6 +494,7 @@ class api {
 /* unused harmony export SaveTransaction */
 /* unused harmony export ScheduledTransactionSummary */
 /* unused harmony export TransactionSummary */
+/* unused harmony export HybridTransaction */
 /* unused harmony export ScheduledTransactionDetail */
 /* unused harmony export TransactionDetail */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_url__ = __webpack_require__(14);
@@ -510,7 +515,7 @@ class api {
 // Requiring portable-fetch like this ensures that we have a global fetch function
 // That makes it easier to override with modules like fetch-mock
 __webpack_require__(21);
-const USER_AGENT = "api_client/js/0.12.0";
+const USER_AGENT = "api_client/js/0.14.0";
 function convertDateToFullDateStringFormat(date) {
     // Convert to RFC 3339 "full-date" format, like "2017-11-27"
     if (date instanceof Date) {
@@ -686,6 +691,45 @@ var TransactionSummary;
         FlagColorEnum[FlagColorEnum["Purple"] = 'purple'] = "Purple";
     })(FlagColorEnum = TransactionSummary.FlagColorEnum || (TransactionSummary.FlagColorEnum = {}));
 })(TransactionSummary || (TransactionSummary = {}));
+/**
+ * @export
+ * @namespace HybridTransaction
+ */
+var HybridTransaction;
+(function (HybridTransaction) {
+    /**
+     * @export
+     * @enum {string}
+     */
+    let ClearedEnum;
+    (function (ClearedEnum) {
+        ClearedEnum[ClearedEnum["Cleared"] = 'cleared'] = "Cleared";
+        ClearedEnum[ClearedEnum["Uncleared"] = 'uncleared'] = "Uncleared";
+        ClearedEnum[ClearedEnum["Reconciled"] = 'reconciled'] = "Reconciled";
+    })(ClearedEnum = HybridTransaction.ClearedEnum || (HybridTransaction.ClearedEnum = {}));
+    /**
+     * @export
+     * @enum {string}
+     */
+    let FlagColorEnum;
+    (function (FlagColorEnum) {
+        FlagColorEnum[FlagColorEnum["Red"] = 'red'] = "Red";
+        FlagColorEnum[FlagColorEnum["Orange"] = 'orange'] = "Orange";
+        FlagColorEnum[FlagColorEnum["Yellow"] = 'yellow'] = "Yellow";
+        FlagColorEnum[FlagColorEnum["Green"] = 'green'] = "Green";
+        FlagColorEnum[FlagColorEnum["Blue"] = 'blue'] = "Blue";
+        FlagColorEnum[FlagColorEnum["Purple"] = 'purple'] = "Purple";
+    })(FlagColorEnum = HybridTransaction.FlagColorEnum || (HybridTransaction.FlagColorEnum = {}));
+    /**
+     * @export
+     * @enum {string}
+     */
+    let TypeEnum;
+    (function (TypeEnum) {
+        TypeEnum[TypeEnum["Transaction"] = 'transaction'] = "Transaction";
+        TypeEnum[TypeEnum["Subtransaction"] = 'subtransaction'] = "Subtransaction";
+    })(TypeEnum = HybridTransaction.TypeEnum || (HybridTransaction.TypeEnum = {}));
+})(HybridTransaction || (HybridTransaction = {}));
 /**
  * @export
  * @namespace ScheduledTransactionDetail
@@ -2511,6 +2555,50 @@ const TransactionsApiFetchParamCreator = function (configuration) {
             };
         },
         /**
+         * Returns all transactions for a specified payee
+         * @summary List payee transactions
+         * @param {string} budget_id - The ID of the Budget.
+         * @param {string} payee_id - The ID of the Payee.
+         * @param {Date} [since_date] - Only return transactions on or after this date.
+         * @param {*} [options] - Override http request options.
+         * @throws {RequiredError}
+         */
+        getTransactionsByPayee(budget_id, payee_id, since_date, options = {}) {
+            // verify required parameter 'budget_id' is not null or undefined
+            if (budget_id === null || budget_id === undefined) {
+                throw new RequiredError('budget_id', 'Required parameter budget_id was null or undefined when calling getTransactionsByPayee.');
+            }
+            // verify required parameter 'payee_id' is not null or undefined
+            if (payee_id === null || payee_id === undefined) {
+                throw new RequiredError('payee_id', 'Required parameter payee_id was null or undefined when calling getTransactionsByPayee.');
+            }
+            const localVarPath = `/budgets/{budget_id}/payees/{payee_id}/transactions`
+                .replace(`{${"budget_id"}}`, encodeURIComponent(String(budget_id)))
+                .replace(`{${"payee_id"}}`, encodeURIComponent(String(payee_id)));
+            const localVarUrlObj = __WEBPACK_IMPORTED_MODULE_0_url__["parse"](localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            localVarHeaderParameter["User-Agent"] = USER_AGENT;
+            localVarHeaderParameter["Accept"] = "application/json";
+            // authentication bearer required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+            }
+            if (since_date !== undefined) {
+                localVarQueryParameter['since_date'] = convertDateToFullDateStringFormat(since_date);
+            }
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            return {
+                url: __WEBPACK_IMPORTED_MODULE_0_url__["format"](localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Updates a transaction
          * @summary Updates an existing transaction
          * @param {string} budget_id - The ID of the Budget.
@@ -2709,6 +2797,30 @@ const TransactionsApiFp = function (configuration) {
             };
         },
         /**
+         * Returns all transactions for a specified payee
+         * @summary List payee transactions
+         * @param {string} budget_id - The ID of the Budget.
+         * @param {string} payee_id - The ID of the Payee.
+         * @param {Date} [since_date] - Only return transactions on or after this date.
+         * @param {*} [options] - Override http request options.
+         * @throws {RequiredError}
+         */
+        getTransactionsByPayee(budget_id, payee_id, since_date, options) {
+            const localVarFetchArgs = TransactionsApiFetchParamCreator(configuration).getTransactionsByPayee(budget_id, payee_id, since_date, options);
+            return (fetchFunction = fetch) => {
+                return fetchFunction(configuration.basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    }
+                    else {
+                        return response.json().then((e) => {
+                            return Promise.reject(e);
+                        });
+                    }
+                });
+            };
+        },
+        /**
          * Updates a transaction
          * @summary Updates an existing transaction
          * @param {string} budget_id - The ID of the Budget.
@@ -2812,6 +2924,18 @@ const TransactionsApiFactory = function (configuration) {
             return TransactionsApiFp(configuration).getTransactionsById(budget_id, transaction_id, options)();
         },
         /**
+         * Returns all transactions for a specified payee
+         * @summary List payee transactions
+         * @param {string} budget_id - The ID of the Budget.
+         * @param {string} payee_id - The ID of the Payee.
+         * @param {Date} [since_date] - Only return transactions on or after this date.
+         * @param {*} [options] - Override http request options.
+         * @throws {RequiredError}
+         */
+        getTransactionsByPayee(budget_id, payee_id, since_date, options) {
+            return TransactionsApiFp(configuration).getTransactionsByPayee(budget_id, payee_id, since_date, options)();
+        },
+        /**
          * Updates a transaction
          * @summary Updates an existing transaction
          * @param {string} budget_id - The ID of the Budget.
@@ -2908,6 +3032,19 @@ class TransactionsApi extends BaseAPI {
      */
     getTransactionsById(budget_id, transaction_id, options) {
         return TransactionsApiFp(this.configuration).getTransactionsById(budget_id, transaction_id, options)();
+    }
+    /**
+     * Returns all transactions for a specified payee
+     * @summary List payee transactions
+     * @param {string} budget_id - The ID of the Budget.
+     * @param {string} payee_id - The ID of the Payee.
+     * @param {Date} [since_date] - Only return transactions on or after this date.
+     * @param {*} [options] - Override http request options.
+     * @throws {RequiredError}
+     * @memberof TransactionsApi
+     */
+    getTransactionsByPayee(budget_id, payee_id, since_date, options) {
+        return TransactionsApiFp(this.configuration).getTransactionsByPayee(budget_id, payee_id, since_date, options)();
     }
     /**
      * Updates a transaction
@@ -11142,15 +11279,18 @@ if (inBrowser) {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
 
 // DOM APIs, for completeness
 
 exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
 };
 exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
 };
 exports.clearTimeout =
 exports.clearInterval = function(timeout) {
@@ -11165,7 +11305,7 @@ function Timeout(id, clearFn) {
 }
 Timeout.prototype.unref = Timeout.prototype.ref = function() {};
 Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
+  this._clearFn.call(scope, this._id);
 };
 
 // Does not start the time, just sets up the members needed.
@@ -11193,7 +11333,7 @@ exports._unrefActive = exports.active = function(item) {
 
 // setimmediate attaches itself to the global object
 __webpack_require__(10);
-// On some exotic environments, it's not clear which object `setimmeidate` was
+// On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
 exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
@@ -11595,9 +11735,8 @@ process.umask = function() { return 0; };
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(2);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba5bd90_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5558d16c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
 /* script */
 
 
@@ -11614,30 +11753,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba5bd90_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba5bd90_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5558d16c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5558d16c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/App.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7ba5bd90", Component.options)
-  } else {
-    hotAPI.reload("data-v-7ba5bd90", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
@@ -13568,7 +13690,10 @@ module.exports = self.fetch.bind(self);
 
   function parseHeaders(rawHeaders) {
     var headers = new Headers()
-    rawHeaders.split(/\r?\n/).forEach(function(line) {
+    // Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
+    // https://tools.ietf.org/html/rfc7230#section-3.2
+    var preProcessedHeaders = rawHeaders.replace(/\r?\n[\t ]+/g, ' ')
+    preProcessedHeaders.split(/\r?\n/).forEach(function(line) {
       var parts = line.split(':')
       var key = parts.shift().trim()
       if (key) {
@@ -13587,7 +13712,7 @@ module.exports = self.fetch.bind(self);
     }
 
     this.type = 'default'
-    this.status = 'status' in options ? options.status : 200
+    this.status = options.status === undefined ? 200 : options.status
     this.ok = this.status >= 200 && this.status < 300
     this.statusText = 'statusText' in options ? options.statusText : 'OK'
     this.headers = new Headers(options.headers)
@@ -13654,6 +13779,8 @@ module.exports = self.fetch.bind(self);
 
       if (request.credentials === 'include') {
         xhr.withCredentials = true
+      } else if (request.credentials === 'omit') {
+        xhr.withCredentials = false
       }
 
       if ('responseType' in xhr && support.blob) {
@@ -13724,9 +13851,8 @@ module.exports = {"clientId":"a56948bc5fe6e80c1a241151611a53350518c119ea413de437
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65af85a3_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4b13c05f_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
 /* script */
 var __vue_script__ = null
 /* template */
@@ -13742,30 +13868,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65af85a3_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65af85a3_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4b13c05f_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4b13c05f_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Nav_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/components/Nav.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-65af85a3", Component.options)
-  } else {
-    hotAPI.reload("data-v-65af85a3", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
@@ -13777,48 +13886,17 @@ if (false) {(function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow"
-      },
-      [
-        _c("h5", { staticClass: "my-0 mr-md-auto font-weight-normal" }, [
-          _vm._v("\n    App Name\n  ")
-        ])
-      ]
-    )
-  }
-]
-render._withStripped = true
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow"},[_c('h5',{staticClass:"my-0 mr-md-auto font-weight-normal"},[_vm._v("\n    App Name\n  ")])])}]
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-65af85a3", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ }),
 /* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_40ab164b_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c70bcd5_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
 /* script */
 var __vue_script__ = null
 /* template */
@@ -13834,30 +13912,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_40ab164b_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_40ab164b_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c70bcd5_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c70bcd5_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Footer_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/components/Footer.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-40ab164b", Component.options)
-  } else {
-    hotAPI.reload("data-v-40ab164b", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
@@ -13869,36 +13930,9 @@ if (false) {(function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "pt-4 my-md-5 pt-md-5 border-top" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 col-md" }, [
-          _c("small", { staticClass: "text-muted" }, [_vm._v("MADE BY")]),
-          _vm._v(" "),
-          _c("h5", [_c("a", { attrs: { href: "#" } }, [_vm._v("You!")])])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('footer',{staticClass:"pt-4 my-md-5 pt-md-5 border-top"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col-12 col-md"},[_c('small',{staticClass:"text-muted"},[_vm._v("MADE BY")]),_vm._v(" "),_c('h5',[_c('a',{attrs:{"href":"#"}},[_vm._v("You!")])])])])])}]
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-40ab164b", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ }),
 /* 29 */
@@ -13907,9 +13941,8 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Budgets_vue__ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c6da5664_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc9d3f7_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
 /* script */
 
 
@@ -13926,30 +13959,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Budgets_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c6da5664_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c6da5664_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc9d3f7_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fc9d3f7_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Budgets_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/components/Budgets.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c6da5664", Component.options)
-  } else {
-    hotAPI.reload("data-v-c6da5664", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
@@ -13961,46 +13977,9 @@ if (false) {(function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "budgets container" },
-    [
-      _c("h5", [_vm._v("Select A Budget")]),
-      _vm._v(" "),
-      _vm._l(_vm.budgets, function(budget) {
-        return _c("div", { staticClass: "row" }, [
-          _c(
-            "a",
-            {
-              staticClass: "col",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  _vm.selectBudget(budget.id, $event)
-                }
-              }
-            },
-            [_vm._v("\n      " + _vm._s(budget.name) + "\n    ")]
-          )
-        ])
-      })
-    ],
-    2
-  )
-}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"budgets container"},[_c('h5',[_vm._v("Select A Budget")]),_vm._v(" "),_vm._l((_vm.budgets),function(budget){return _c('div',{staticClass:"row"},[_c('a',{staticClass:"col",attrs:{"href":"#"},on:{"click":function($event){_vm.selectBudget(budget.id, $event)}}},[_vm._v("\n      "+_vm._s(budget.name)+"\n    ")])])})],2)}
 var staticRenderFns = []
-render._withStripped = true
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c6da5664", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ }),
 /* 31 */
@@ -14009,9 +13988,8 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Transactions_vue__ = __webpack_require__(6);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77126b05_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_22b06f46_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
-var disposed = false
 /* script */
 
 
@@ -14028,30 +14006,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Transactions_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77126b05_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77126b05_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_22b06f46_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_22b06f46_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Transactions_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/components/Transactions.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-77126b05", Component.options)
-  } else {
-    hotAPI.reload("data-v-77126b05", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
@@ -14063,75 +14024,9 @@ if (false) {(function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("h5", [_vm._v("Transactions")]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.transactions, function(transaction) {
-          return _c("tr", { key: transaction.id }, [
-            _c("td", [_vm._v(_vm._s(transaction.account_name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(transaction.date))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(transaction.payee_name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(transaction.category_name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(transaction.memo))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(
-                  _vm
-                    .convertMilliUnitsToCurrencyAmount(transaction.amount)
-                    .toFixed(2)
-                )
-              )
-            ])
-          ])
-        })
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Account")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Date")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Payee")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Category")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Memo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Amount")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h5',[_vm._v("Transactions")]),_vm._v(" "),_c('table',{staticClass:"table"},[_vm._m(0),_vm._v(" "),_c('tbody',_vm._l((_vm.transactions),function(transaction){return _c('tr',{key:transaction.id},[_c('td',[_vm._v(_vm._s(transaction.account_name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(transaction.date))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(transaction.payee_name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(transaction.category_name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(transaction.memo))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(_vm.convertMilliUnitsToCurrencyAmount(transaction.amount).toFixed(2)))])])}))])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',[_c('tr',[_c('th',[_vm._v("Account")]),_vm._v(" "),_c('th',[_vm._v("Date")]),_vm._v(" "),_c('th',[_vm._v("Payee")]),_vm._v(" "),_c('th',[_vm._v("Category")]),_vm._v(" "),_c('th',[_vm._v("Memo")]),_vm._v(" "),_c('th',[_vm._v("Amount")])])])}]
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-77126b05", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ }),
 /* 33 */
@@ -14140,172 +14035,9 @@ if (false) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "app" } },
-    [
-      _c("Nav"),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container" },
-        [
-          _vm.loading
-            ? _c("h1", { staticClass: "display-4" }, [_vm._v("Loading...")])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.error
-            ? _c("div", [
-                _c("h1", { staticClass: "display-4" }, [_vm._v("Oops!")]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead" }, [_vm._v(_vm._s(_vm.error))]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: { click: _vm.resetToken }
-                  },
-                  [_vm._v("Try Again >")]
-                )
-              ])
-            : _c(
-                "div",
-                [
-                  !_vm.ynab.token
-                    ? _c("form", [
-                        _c("h1", { staticClass: "display-4" }, [
-                          _vm._v("Congrats!")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "lead" }, [
-                          _vm._v(
-                            "You have successfully started a new YNAB API Application!"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(" ")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("h1", { staticClass: "display-5" }, [
-                            _vm._v("Hello!")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "lead" }, [
-                            _vm._v(
-                              "If you would like to use this App, please authorize with YNAB!"
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              on: { click: _vm.authorizeWithYNAB }
-                            },
-                            [_vm._v("Authorize This App With YNAB >")]
-                          )
-                        ])
-                      ])
-                    : !_vm.budgetId
-                      ? _c("Budgets", {
-                          attrs: {
-                            budgets: _vm.budgets,
-                            selectBudget: _vm.selectBudget
-                          }
-                        })
-                      : _c(
-                          "div",
-                          [
-                            _c("Transactions", {
-                              attrs: { transactions: _vm.transactions }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-info",
-                                on: {
-                                  click: function($event) {
-                                    _vm.budgetId = null
-                                  }
-                                }
-                              },
-                              [_vm._v("< Select Another Budget")]
-                            )
-                          ],
-                          1
-                        )
-                ],
-                1
-              ),
-          _vm._v(" "),
-          _c("Footer")
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [
-        _vm._v("Please go to your "),
-        _c(
-          "a",
-          {
-            attrs: {
-              href: "https://app.youneedabudget.com/settings/developer",
-              target: "_blank",
-              rel: "noopener noreferrer"
-            }
-          },
-          [_vm._v("YNAB Developer Settings")]
-        ),
-        _vm._v(" and create a new OAuth Application.")
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _vm._v("Copy your client ID and redirect URI into "),
-        _c("em", [_vm._v("src/config.json")]),
-        _vm._v(".")
-      ]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Then build your amazing app!")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("If you have any questions please reach out to us at "),
-      _c("strong", [_vm._v("api@youneedabudget.com")]),
-      _vm._v(".")
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Nav'),_vm._v(" "),_c('div',{staticClass:"container"},[(_vm.loading)?_c('h1',{staticClass:"display-4"},[_vm._v("Loading...")]):_vm._e(),_vm._v(" "),(_vm.error)?_c('div',[_c('h1',{staticClass:"display-4"},[_vm._v("Oops!")]),_vm._v(" "),_c('p',{staticClass:"lead"},[_vm._v(_vm._s(_vm.error))]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.resetToken}},[_vm._v("Try Again >")])]):_c('div',[(!_vm.ynab.token)?_c('form',[_c('h1',{staticClass:"display-4"},[_vm._v("Congrats!")]),_vm._v(" "),_c('p',{staticClass:"lead"},[_vm._v("You have successfully started a new YNAB API Application!")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('p',[_vm._v(" ")]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('h2',[_vm._v("Hello!")]),_vm._v(" "),_c('p',{staticClass:"lead"},[_vm._v("If you would like to use this App, please authorize with YNAB!")]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.authorizeWithYNAB}},[_vm._v("Authorize This App With YNAB >")])])]):(!_vm.budgetId)?_c('Budgets',{attrs:{"budgets":_vm.budgets,"selectBudget":_vm.selectBudget}}):_c('div',[_c('Transactions',{attrs:{"transactions":_vm.transactions}}),_vm._v(" "),_c('button',{staticClass:"btn btn-info",on:{"click":function($event){_vm.budgetId = null}}},[_vm._v("< Select Another Budget")])],1),_vm._v(" "),_vm._m(2)],1),_vm._v(" "),_c('Footer')],1)],1)}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',[_c('li',[_vm._v("Please go to your "),_c('a',{attrs:{"href":"https://app.youneedabudget.com/settings/developer","target":"_blank","rel":"noopener noreferrer"}},[_vm._v("YNAB Developer Settings")]),_vm._v(" and create a new OAuth Application.")]),_vm._v(" "),_c('li',[_vm._v("Copy your client ID and redirect URI into "),_c('em',[_vm._v("src/config.json")]),_vm._v(".")]),_vm._v(" "),_c('li',[_vm._v("Then build your amazing app!")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_vm._v("If you have any questions please reach out to us at "),_c('strong',[_vm._v("api@youneedabudget.com")]),_vm._v(".")])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('h2',[_vm._v("Privacy Policy")]),_vm._v(" "),_c('p',[_vm._v("This website does not store any information from you or your YNAB account. All data retrieved from the YNAB API is stored only in your browser and is never transmitted to any other location or third-party.")])])}]
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7ba5bd90", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ })
 /******/ ]);

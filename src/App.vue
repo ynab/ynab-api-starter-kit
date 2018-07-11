@@ -29,7 +29,7 @@
           <p>&nbsp;</p>
 
           <div class="form-group">
-            <h1 class="display-5">Hello!</h1>
+            <h2>Hello!</h2>
             <p class="lead">If you would like to use this App, please authorize with YNAB!</p>
             <button @click="authorizeWithYNAB" class="btn btn-primary">Authorize This App With YNAB &gt;</button>
           </div>
@@ -44,6 +44,10 @@
           <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
         </div>
 
+        <div>
+          <h2>Privacy Policy</h2>
+          <p>This website does not store any information from you or your YNAB account. All data retrieved from the YNAB API is stored only in your browser and is never transmitted to any other location or third-party.</p>
+        </div>
       </div>
 
       <Footer />
