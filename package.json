@@ -16,14 +16,14 @@
   "devDependencies": {
     "css-loader": "^1.0.0",
     "npm-check-updates": "^2.14.2",
-    "vue": "2.5.16",
-    "vue-loader": "^15.2.4",
-    "vue-server-renderer": "2.5.16",
-    "vue-template-compiler": "2.5.16",
-    "webpack": "^4.16.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4",
+    "vue": "2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-server-renderer": "2.5.17",
+    "vue-template-compiler": "2.5.17",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9",
     "xhr": "^2.5.0",
-    "ynab": "^1.1.0"
+    "ynab": "^1.6.0"
   }
 }
