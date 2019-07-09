@@ -10,20 +10,20 @@
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^2.4.2",
     "cpr": "^3.0.1"
   },
   "devDependencies": {
-    "css-loader": "^1.0.0",
-    "npm-check-updates": "^2.14.2",
-    "vue": "2.5.17",
-    "vue-loader": "^15.4.2",
-    "vue-server-renderer": "2.5.17",
-    "vue-template-compiler": "2.5.17",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.9",
+    "css-loader": "^3.0.0",
+    "npm-check-updates": "^3.1.17",
+    "vue": "2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-server-renderer": "2.6.10",
+    "vue-template-compiler": "2.6.10",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
     "xhr": "^2.5.0",
-    "ynab": "^1.6.0"
+    "ynab": "^1.13.4"
   }
 }
