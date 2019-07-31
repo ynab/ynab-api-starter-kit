@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const cpr = require('cpr');
 const chalk = require('chalk');
@@ -47,7 +48,7 @@ function copyFiles (done) {
 
 function installDeps (done) {
   console.log(chalk.cyan('  Installing dependencies...'));
-  const s = spawn('npm', ['install'], { cwd: TO });
+  const s = crossPlatformSpawn('npm', ['install'], { cwd: TO });
   s.on('close', done);
 }
 
@@ -57,5 +58,10 @@ function startServer () {
   console.log(chalk.green('Run `npm start` in the project folder to start it again.'));
   console.log(chalk.green('Press `control + c` to stop the dev server.'));
   console.log(chalk.green('Enjoy!'));
-  spawn('npm', ['start'], { cwd: TO });
+  crossPlatformSpawn('npm', ['start'], { cwd: TO });
+}
+
+function crossPlatformSpawn (cmd, args, options) {
+  options.shell = os.platform() === 'win32';
+  return spawn(cmd, args, options);
 }
