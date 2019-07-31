@@ -79,6 +79,6 @@ If you have a GitHub account, fork this repo. You can now modify your fork, run
 
 ## License
 
-Copyright (c) 2018 You Need A Budget, LLC
+Copyright (c) 2019 You Need A Budget, LLC
 
 Licensed under the Apache-2.0 license
