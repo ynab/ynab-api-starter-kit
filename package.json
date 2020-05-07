@@ -1,6 +1,6 @@
 {
   "name": "ynab-api-starter-kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "To quickly get started building an App with the YNAB API.",
   "bin": "bin/start.js",
   "scripts": {
