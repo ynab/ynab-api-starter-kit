@@ -47,11 +47,20 @@ jobs:
           npm run build --if-present
           cp -pR ./dist/* ./public/
 
-      - name: Deploy to gh-pages
+      - name: Deploy to gh-pages (using automated GITHUB_TOKEN --- won't work with forks)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          #deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          ## If deploying on a custom domain:
+          # cname: mycustomdomain.com
+
+      - name: "Deploy to gh-pages (backup using SSH deploy key --- requires configuration)"
+        if: ${{ failure() }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_branch: gh-pages
           publish_dir: ./public
           ## If deploying on a custom domain:
