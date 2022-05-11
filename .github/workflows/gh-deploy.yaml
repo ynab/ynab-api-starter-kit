@@ -49,6 +49,7 @@ jobs:
           cp -pR ./dist/* ./public/
 
       - name: Deploy to 'gh-pages' branch (using automated GITHUB_TOKEN --- won't work with forks)
+        id: deploy-with-token
         continue-on-error: true
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -59,7 +60,8 @@ jobs:
           # cname: mycustomdomain.com
 
       - name: "(If failure) deploy to 'gh-pages' branch (backup using SSH deploy key --- requires configuration)"
-        if: ${{ failure() }}
+        id: deploy-with-ssh-key
+        if: ${{ steps.deploy-with-token.outcome != 'success' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
