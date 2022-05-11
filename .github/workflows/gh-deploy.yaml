@@ -2,7 +2,7 @@
 # https://dev.to/achukka/deploy-react-app-using-github-actions-157d
 # https://github.com/jlumbroso/hugo-geekdoc-github-example/blob/47d86ed41e1678c13b17c44a71140563c8882f3c/.github/workflows/gh-pages.yaml
 
-name: Deploy React Application to GitHub Pages
+name: Deploy YNAB Application to GitHub Pages
 
 # Controls when the action will run.
 on:
@@ -25,12 +25,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: "Check-out the content of the repository"
+        uses: actions/checkout@v2
         with:
           submodules: true # Fetch recursive submodules (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: "Install Node.js ${{ matrix.node-version }}"
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
@@ -41,13 +42,14 @@ jobs:
       #     npm run build --if-present
       #     npm test
 
-      - name: npm run build
+      - name: "Install dependencies, then build output JS bundle"
         run: |
           npm install
           npm run build --if-present
           cp -pR ./dist/* ./public/
 
-      - name: Deploy to gh-pages (using automated GITHUB_TOKEN --- won't work with forks)
+      - name: Deploy to 'gh-pages' branch (using automated GITHUB_TOKEN --- won't work with forks)
+        continue-on-error: true
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -56,7 +58,7 @@ jobs:
           ## If deploying on a custom domain:
           # cname: mycustomdomain.com
 
-      - name: "Deploy to gh-pages (backup using SSH deploy key --- requires configuration)"
+      - name: "(If failure) deploy to 'gh-pages' branch (backup using SSH deploy key --- requires configuration)"
         if: ${{ failure() }}
         uses: peaceiris/actions-gh-pages@v3
         with:
