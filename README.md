@@ -68,25 +68,29 @@ Every YNAB app requires their own OAuth Application credentials.
 
 ### Step 3: Wait for GitHub Actions to deploy app to GitHub Pages
 
+When committing the change to `src/config.json` to your repository, a new compilation cycle is triggered through GitHub Actions. Typically, this should take about 2-3 minutes, afterwhich your project can be accessible from:
+
+```
+https://your-github-username.github.io/your-new-ynab-project/
+```
+
+You can also read more about how to see [the output of GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#viewing-the-activity-for-a-workflow-run).
+
 ## Code Architecture of the App
 
-Check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more information on how to use the YNAB API.
+Now that you have a sandbox to explore the YNAB API, you will want to check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more information on what can be done.
 
-This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
-to use whatever framework or libraries you prefer.
+Also, although this project happens to use the [Vue.js](https://vuejs.org/) front-end framework, it is not required. Feel free to use whatever framework or libraries you prefer (popular alternatives to Vue.js include React and Angular).
 
 ### [`src/App.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/App.vue)
 
-In the script portion of this page, you can see how to build an OAuth URI to
-obtain an access token for the API.
+In the script portion of this page, you can see how to build an OAuth URI to obtain an access token for the API.
 
 It also has some examples on retrieving budgets and transactions.
 
 ### [`src/Transactions.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/components/Transactions.vue)
 
-This displays all the transactions when you've got them. It also has an example
-of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that
-YNAB uses into the currency format of the budget.
+This displays all the transactions when you've got them. It also has an example of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that YNAB uses into the currency format of the budget.
 
 ## Local Development
 
@@ -148,6 +152,36 @@ This will:
 - Create a copy of this project on your computer.
 - Install all the dependencies.
 - Start up the server ready for development.
+
+## Bonus: Using a Custom Domain Name
+
+Through this tutorial, we have been serving the app through GitHub Pages at the following URL:
+
+```
+https://your-github-username.github.io/your-new-ynab-project/
+```
+
+However, it is very easy to serve this app from its own custom domain name. Although this is beyond the scope of this tutorial, the steps involve:
+
+1. Register a domain name, if you don't already have one (for instance with [NameCheap](https://www.namecheap.com)), we will assume it is `my-ynab-app.com`.
+
+2. Configure the DNS of the domain name to point towards GitHub's servers, [as described in GitHub's documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain).
+
+3. In your repository, edit the file `.github/workflows/gh-deploy.yaml` to change both occurrences of this commented out lines:
+
+   ```yaml
+   # cname: mycustomdomain.com
+   ```
+
+   into:
+
+   ```yaml
+   cname: my-ynab-app.com
+   ```
+
+4. Edit the file `src/config.json` to likewise edit the Redirect URL to the domain name. (If you forget this step, your app will not redirect users to the right place after authorizing connection to YNAB.)
+
+5. Go to the [YNAB Developer Settings](https://app.youneedabudget.com/settings/developer), as you need to add the new Redirect URL that uses your custom domain. (If you forget this step, YNAB will not allow the redirection to your app to proceed, and will produce an error message.)
 
 ## License
 
