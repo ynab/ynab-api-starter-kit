@@ -4,13 +4,13 @@ Do you want to build a web app with the [YNAB API](https://api.youneedabudget.co
 
 Try this YNAB API Starter Kit!
 
-Without any prior knowledge, it allows you to build:
+Without **any** prior knowledge, it allows you to build:
 
 - a web app that uses JavaScript/Vue for its frontend,
 - makes requests to the YNAB API through OAuth,
 - and is entirely compiled on GitHub, and hosted on GitHub Pages!
 
-![Works with YNAB](./public/works_with_ynab.svg)
+[![Works with YNAB](./public/works_with_ynab.svg)](https://api.youneedabudget.com/)
 
 ## Live Demo
 
@@ -22,8 +22,6 @@ View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this pr
 
 ## Getting Started
 
-### Pre
-
 ### Method 1: Entirely on GitHub!
 
 This method does not require installing anything on your computer, and does not require any prior knowledge. It will allow you to launch a copy of this project in less than 5 minutes, that you can start modifying and learning from.
@@ -32,9 +30,43 @@ This method does not require installing anything on your computer, and does not 
 
 2. Click [here](https://github.com/jlumbroso/ynab-api-starter-kit/generate) to generate a repository from this template (you can read GitHub's documentation on what it means to [create a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)).
 
-In this second step, you will have created your own personal copy of this project as your own repository, and called it `new-ynab-project`, in your GitHub account which we will assume is called `your-username`.
+In this second step, you will have created your own personal copy of this project as your own repository, and called it `your-new-ynab-project`, in your GitHub account which we will assume is called `your-github-username`.
 
 3. You must modify the file `src/
+
+## Create An OAuth Application
+
+OAuth is the framework through which YNAB can share access to a user's data safely, without requiring that user share their credentials.
+
+Every YNAB app requires their own OAuth Application credentials.
+
+1. You will need a YNAB account, and [to be logged in](https://app.youneedabudget.com/users/authentication).
+
+2. Go to the [YNAB Developer Settings](https://app.youneedabudget.com/settings/developer)
+   and click [New Application](https://app.youneedabudget.com/oauth/applications/new).
+
+3. The name, description, website URL and privacy policy URL are all information that will be provided to users for them to determine whether to trust your app (or not!); but these will not affect the operation of your app.
+
+   The _Redirect URI(s)_ parameter is important, as it controls where the user data can be sent. It is important to add a URL to the app, in this case:
+
+   ```
+   https://<your-github-username>.github.io/<your-new-ynab-project>/
+   ```
+
+4. Check that you acknowledge the terms of service (after reading them!), and click "Save Application."
+
+   You'll see your Client ID, Client Secret and Redirect URI(s) (you can [read more about these concepts in YNAB's documentation](https://api.youneedabudget.com/#outh-applications)). For this project, we will be using the _Implicit Grant Flow_ and will only need the Client ID.
+
+5. Copy and paste the Client ID and URL to your app into the `src/config.json` file of the repository (you can edit them on GitHub directly):
+
+   ```json
+   {
+     "clientId": "<your client ID>",
+     "redirectUri": "https://<your-github-username>.github.io/<your-new-ynab-project>/"
+   }
+   ```
+
+# Content below is being rewritten
 
 ## Usage
 
@@ -54,15 +86,6 @@ If you're looking for a little less magic:
 - Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
 - From within the folder, run `npm install`
 - Then run `npm start`
-
-## Create An OAuth Application
-
-Go to the [YNAB Developer Settings](https://app.youneedabudget.com/settings/developer)
-and create a new application.
-
-You'll see your client id, client secret and redirect URI(s).
-
-Copy and paste your client id and redirect URI into the `src/config.json` file.
 
 ## Development
 
