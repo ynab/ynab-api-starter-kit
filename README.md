@@ -6,7 +6,7 @@ Try this YNAB API Starter Kit!
 
 Without **any** prior knowledge, it allows you to build:
 
-- a web app that uses JavaScript/Vue for its frontend,
+- a web app that uses JavaScript and the [Vue.js](https://vuejs.org/) framework for its frontend,
 - makes requests to the YNAB API through OAuth,
 - and is entirely compiled on GitHub, and hosted on GitHub Pages!
 
@@ -18,23 +18,21 @@ The starter project invites a user to authorize YNAB to share information with t
 
 View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project will start off looking like or take a look below.
 
-![kapture 2018-03-28 at 12 37 23](https://user-images.githubusercontent.com/759811/38046244-c9806f0a-3284-11e8-8788-509912ec79c2.gif)
+![Screen recording on 2018-03-28 at 12:37:23](https://user-images.githubusercontent.com/759811/38046244-c9806f0a-3284-11e8-8788-509912ec79c2.gif)
 
-## Getting Started
+## Getting Started—Entirely Without Leaving Your Browser!
 
-### Method 1: Entirely on GitHub!
+This method does not require installing anything on your computer, and does not require any prior knowledge. It will allow you to launch a copy of this project in less than 5 minutes, that you can start modifying and learning from. (_Later, you can also edit and work on this project on your computer, of course._)
 
-This method does not require installing anything on your computer, and does not require any prior knowledge. It will allow you to launch a copy of this project in less than 5 minutes, that you can start modifying and learning from.
+### Step 1: Create your own copy of the project
 
 1. [Sign-up for a GitHub account](https://github.com/signup), if you don't already have one.
 
 2. Click [here](https://github.com/jlumbroso/ynab-api-starter-kit/generate) to generate a repository from this template (you can read GitHub's documentation on what it means to [create a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)).
 
-In this second step, you will have created your own personal copy of this project as your own repository, and called it `your-new-ynab-project`, in your GitHub account which we will assume is called `your-github-username`.
+**NOTE:** In the following steps, we will assume the GitHub account you created has username `your-github-username` and that you have called your project `your-new-ynab-project`, but change these accordingly when following instructions.
 
-3. You must modify the file `src/
-
-## Create An OAuth Application
+### Step 2: Obtain an OAuth Client ID so the app can access the YNAB API
 
 OAuth is the framework through which YNAB can share access to a user's data safely, without requiring that user share their credentials.
 
@@ -66,43 +64,16 @@ Every YNAB app requires their own OAuth Application credentials.
    }
    ```
 
-# Content below is being rewritten
+**NOTE:** At this point, your app will only be able to access the YNAB API in [Restricted Mode](https://api.youneedabudget.com/#oauth-restricted-mode): This means you can access it an unlimited number of times, but other users will only be able to authenticate a combined total of 25 times, before you will need to write api@youneedabudget.com to reset your quota or get your app officially approved.
 
-## Usage
+### Step 3: Wait for GitHub Actions to deploy app to GitHub Pages
 
-- Install [Node.js](https://nodejs.org/).
-- In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
+## Code Architecture of the App
 
-This will:
-
-- Create a copy of this project on your computer.
-- Install all the dependencies.
-- Start up the server ready for development.
-
-### Alternatively
-
-If you're looking for a little less magic:
-
-- Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
-- From within the folder, run `npm install`
-- Then run `npm start`
-
-## Development
-
-Check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more
-information on how to use the YNAB API.
+Check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more information on how to use the YNAB API.
 
 This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
 to use whatever framework or libraries you prefer.
-
-### `npm start`
-
-Runs the development server (defaults to `localhost:8080`) and watches for changes.
-
-### `npm run build`
-
-Builds the production assets for deployment. This will build to `dist/build.js`
-which the `index.html` will load.
 
 ### [`src/App.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/App.vue)
 
@@ -116,6 +87,38 @@ It also has some examples on retrieving budgets and transactions.
 This displays all the transactions when you've got them. It also has an example
 of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that
 YNAB uses into the currency format of the budget.
+
+## Local Development
+
+### `npm start`
+
+Runs the development server (defaults to `localhost:8080`) and watches for changes.
+
+### `npm run build`
+
+Builds the production assets for deployment. This will build to `dist/build.js`
+which the `index.html` will load.
+
+## Alternative Methods
+
+### Cloning/forking the repository
+
+If you're looking for a little less magic:
+
+- Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
+- From within the folder, run `npm install`
+- Then run `npm start`
+
+### Using the create-app
+
+- Install [Node.js](https://nodejs.org/).
+- In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
+
+This will:
+
+- Create a copy of this project on your computer.
+- Install all the dependencies.
+- Start up the server ready for development.
 
 ## License
 
