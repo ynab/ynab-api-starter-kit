@@ -48,12 +48,6 @@ jobs:
           npm run build --if-present
           cp -pR ./dist ./public/
 
-      - name: "Copy the README.md to the deploy folder"
-        run: |
-          cp -p README.md ./public/
-          npm install markdown-to-html
-          PATH=$(npm bin):$PATH github-markdown README.md > ./public/README.html
-
       # The following may not work if the repo is a fork:
       # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
       - name: Deploy to 'gh-pages' branch (using automated GITHUB_TOKEN --- won't work with forks)
