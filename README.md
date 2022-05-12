@@ -60,7 +60,7 @@ Every YNAB app requires their own OAuth Application credentials.
    ```json
    {
      "clientId": "<your client ID>",
-     "redirectUri": "https://<your-github-username>.github.io/<your-new-ynab-project>/"
+     "redirectUri": "https://your-github-username.github.io/your-new-ynab-project/"
    }
    ```
 
@@ -90,29 +90,58 @@ YNAB uses into the currency format of the budget.
 
 ## Local Development
 
-### `npm start`
+In order to modify and run/test this app locally, you will need to have:
 
-Runs the development server (defaults to `localhost:8080`) and watches for changes.
+- the `git` version control tool (read [installation instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git));
+- the most recent LTS (Long Term Support) version of Node.js, which will install the `npm` command (read [installation instructions](https://nodejs.org/en/download/)).
 
-### `npm run build`
+To create a local copy of this project, you must clone your repository:
 
-Builds the production assets for deployment. This will build to `dist/build.js`
-which the `index.html` will load.
+```bash
+$ git clone https://github.com/your-github-username/your-new-ynab-project/
+```
+
+Once that copy is created, you must install the necessary modules locally:
+
+```bash
+$ cd your-new-ynab-project
+$ npm install
+```
+
+Now you have properly set up a local environment to work on your project.
+
+### Launch a local preview with `npm start`
+
+Once your environment is configured, `npm start` will run the development server (defaults to `localhost:8080`) and watches for changes. Any modification to the source code will be updated immediately.
+
+This is useful to make a number of changes and preview them before committing the changes to the repository..
+
+### Build with `npm run build`
+
+This command builds the production assets for deployment. This will build to `dist/build.js` which the `public/index.html` will load.
+
+It is not really a command that will be useful for beginners, but it is the command that GitHub runs every time a change is made.
 
 ## Alternative Methods
 
+The above method is the recommend method, because it keeps all the elements of your app in a repository, so you are not burdened by having a development environment on your computer.
+
+However there are more traditional methods of proceeding.
+
 ### Cloning/forking the repository
 
-If you're looking for a little less magic:
+If you do not want to make your own app, just want to preview this one:
 
-- Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
-- From within the folder, run `npm install`
-- Then run `npm start`
+1. Use `git` to clone this repository: `git clone https://github.com/ynab/ynab-api-starter-kit`
+2. From within the folder, run `npm install`
+3. Then run `npm start` to launch the local server.
 
-### Using the create-app
+### Calling our `create-app` from scratch
 
-- Install [Node.js](https://nodejs.org/).
-- In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
+If you are an experienced developer, and just want to use this starter code for convenience, you may want to use our quick starter:
+
+1. Install [Node.js](https://nodejs.org/).
+2. In your terminal, run `npx ynab-api-starter-kit my-new-ynab-project`
 
 This will:
 
@@ -122,8 +151,12 @@ This will:
 
 ## License
 
-Copyright (c) 2019 You Need A Budget, LLC
+Copyright (c) 2019 You Need A Budget, LLC.
 
-Copyright (c) 2022 Jérémie Lumbroso
+Copyright (c) 2022 Jérémie Lumbroso.
 
-Licensed under the Apache-2.0 license
+Licensed under the Apache-2.0 license.
+
+```
+
+```
