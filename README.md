@@ -1,34 +1,59 @@
 # YNAB API Starter Kit
 
-Want to build a web app with the [YNAB API](https://api.youneedabudget.com/) but
-not sure how to get started?
+Do you want to build a web app with the [YNAB API](https://api.youneedabudget.com/), but are not sure how to get started?
 
 Try this YNAB API Starter Kit!
 
-## Demo
+Without any prior knowledge, it allows you to build:
 
-View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project
-will start off looking like or take a look below.
+- a web app that uses JavaScript/Vue for its frontend,
+- makes requests to the YNAB API through OAuth,
+- and is entirely compiled on GitHub, and hosted on GitHub Pages!
+
+![Works with YNAB](./public/works_with_ynab.svg)
+
+## Live Demo
+
+The starter project invites a user to authorize YNAB to share information with the project, provides a choice of budget, then displays all the transactions. It's probably not very useful, but it demonstrates several key features involved in building a YNAB web app.
+
+View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project will start off looking like or take a look below.
 
 ![kapture 2018-03-28 at 12 37 23](https://user-images.githubusercontent.com/759811/38046244-c9806f0a-3284-11e8-8788-509912ec79c2.gif)
 
+## Getting Started
+
+### Pre
+
+### Method 1: Entirely on GitHub!
+
+This method does not require installing anything on your computer, and does not require any prior knowledge. It will allow you to launch a copy of this project in less than 5 minutes, that you can start modifying and learning from.
+
+1. [Sign-up for a GitHub account](https://github.com/signup), if you don't already have one.
+
+2. Click [here](https://github.com/jlumbroso/ynab-api-starter-kit/generate) to generate a repository from this template (you can read GitHub's documentation on what it means to [create a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)).
+
+In this second step, you will have created your own personal copy of this project as your own repository, and called it `new-ynab-project`, in your GitHub account which we will assume is called `your-username`.
+
+3. You must modify the file `src/
+
 ## Usage
 
-* Install [Node.js](https://nodejs.org/).
-* In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
+- Install [Node.js](https://nodejs.org/).
+- In your terminal, run `npx ynab-api-starter-kit my-ynab-app`
 
 This will:
-* Create a copy of this project on your computer.
-* Install all the dependencies.
-* Start up the server ready for development.
+
+- Create a copy of this project on your computer.
+- Install all the dependencies.
+- Start up the server ready for development.
 
 ### Alternatively
 
 If you're looking for a little less magic:
 
-* Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
-* From within the folder, run `npm install`
-* Then run `npm start`
+- Use git to clone it: `git clone https://github.com/ynab/ynab-api-starter-kit`
+- From within the folder, run `npm install`
+- Then run `npm start`
 
 ## Create An OAuth Application
 
@@ -48,9 +73,11 @@ This example uses [Vue.js](https://vuejs.org/) but it is not required. Feel free
 to use whatever framework or libraries you prefer.
 
 ### `npm start`
+
 Runs the development server (defaults to `localhost:8080`) and watches for changes.
 
 ### `npm run build`
+
 Builds the production assets for deployment. This will build to `dist/build.js`
 which the `index.html` will load.
 
@@ -67,18 +94,10 @@ This displays all the transactions when you've got them. It also has an example
 of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that
 YNAB uses into the currency format of the budget.
 
-## Deployment
-
-<a href="https://heroku.com/deploy?template=https://github.com/ynab/ynab-api-starter-kit">
-  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
-</a>
-
-### GitHub Pages
-If you have a GitHub account, fork this repo. You can now modify your fork, run
-`npm run build`, commit and push the code. Your app will be live on `https://[yourgithubacccount].github.io/ynab-api-starter-kit/`.
-
 ## License
 
 Copyright (c) 2019 You Need A Budget, LLC
+
+Copyright (c) 2022 Jérémie Lumbroso
 
 Licensed under the Apache-2.0 license

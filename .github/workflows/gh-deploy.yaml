@@ -48,6 +48,8 @@ jobs:
           npm run build --if-present
           cp -pR ./dist/* ./public/
 
+      # The following may not work if the repo is a fork:
+      # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
       - name: Deploy to 'gh-pages' branch (using automated GITHUB_TOKEN --- won't work with forks)
         id: deploy-with-token
         continue-on-error: true
@@ -61,6 +63,9 @@ jobs:
 
       - name: "(If failure) deploy to 'gh-pages' branch (backup using SSH deploy key --- requires configuration)"
         id: deploy-with-ssh-key
+        # Cannot use failure() as continue-on-error overrides the final conclusion
+        # It is necessary to look at the outcome of the step.
+        # See https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context
         if: ${{ steps.deploy-with-token.outcome != 'success' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
