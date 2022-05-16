@@ -1,0 +1,76 @@
+# REF: Inspired from:
+# https://dev.to/achukka/deploy-react-app-using-github-actions-157d
+# https://github.com/jlumbroso/hugo-geekdoc-github-example/blob/47d86ed41e1678c13b17c44a71140563c8882f3c/.github/workflows/gh-pages.yaml
+
+name: Deploy YNAB Application to GitHub Pages
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x] # We will deploy with only one version of node
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: "Check-out the content of the repository"
+        uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch recursive submodules (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: "Install Node.js ${{ matrix.node-version }}"
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # - name: npm ci, build and test
+      #   run: |
+      #     npm ci
+      #     npm run build --if-present
+      #     npm test
+
+      - name: "Install dependencies, then build output JS bundle"
+        run: |
+          npm install
+          npm run build --if-present
+          cp -pR ./dist ./public/
+
+      # The following may not work if the repo is a fork:
+      # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+      - name: Deploy to 'gh-pages' branch (using automated GITHUB_TOKEN --- won't work with forks)
+        id: deploy-with-token
+        continue-on-error: true
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          ## If deploying on a custom domain:
+          # cname: mycustomdomain.com
+
+      - name: "(If failure) deploy to 'gh-pages' branch (backup using SSH deploy key --- requires configuration)"
+        id: deploy-with-ssh-key
+        # Cannot use failure() as continue-on-error overrides the final conclusion
+        # It is necessary to look at the outcome of the step.
+        # See https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context
+        if: ${{ steps.deploy-with-token.outcome != 'success' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          ## If deploying on a custom domain:
+          # cname: mycustomdomain.com
