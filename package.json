@@ -18,7 +18,7 @@
     "vue-template-compiler": "2.6.11",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
+    "webpack-dev-server": "^4.11.1",
     "xhr": "^2.5.0",
     "ynab": "^1.19.0"
   }
