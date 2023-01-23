@@ -10,16 +10,17 @@
     "build": "NODE_ENV='production' webpack --progress"
   },
   "devDependencies": {
+    "@webpack-cli/serve": "^2.0.1",
     "css-loader": "^3.5.3",
     "npm-check-updates": "^4.1.2",
     "vue": "2.6.11",
     "vue-loader": "^15.9.2",
     "vue-server-renderer": "2.7.14",
     "vue-template-compiler": "2.6.11",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^4.11.1",
+    "webpack": "5.24.4",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1",
     "xhr": "^2.5.0",
-    "ynab": "^1.19.0"
+    "ynab": "1.45.0"
   }
 }
