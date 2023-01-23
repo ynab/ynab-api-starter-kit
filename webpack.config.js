@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "./public"),
+    static: path.resolve(__dirname, "./public"),
   },
   module: {
     rules: [
