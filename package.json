@@ -12,7 +12,7 @@
   "devDependencies": {
     "@webpack-cli/serve": "^2.0.1",
     "css-loader": "^3.5.3",
-    "npm-check-updates": "^4.1.2",
+    "npm-check-updates": "^16.7.4",
     "vue": "2.6.11",
     "vue-loader": "^15.9.2",
     "vue-server-renderer": "2.7.14",
