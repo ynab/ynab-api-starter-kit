@@ -6,8 +6,8 @@
   "description": "To quickly get started building an App with the YNAB API.",
   "bin": "bin/start.js",
   "scripts": {
-    "start": "webpack-dev-server --open --hot",
-    "build": "NODE_ENV='production' webpack --progress"
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production --progress"
   },
   "devDependencies": {
     "@webpack-cli/serve": "^2.0.1",
@@ -17,10 +17,10 @@
     "vue-loader": "^15.9.2",
     "vue-server-renderer": "2.7.14",
     "vue-template-compiler": "2.6.11",
-    "webpack": "5.24.4",
+    "webpack": "5.76.2",
     "webpack-cli": "5.0.1",
-    "webpack-dev-server": "4.11.1",
-    "xhr": "^2.5.0",
-    "ynab": "1.45.0"
+    "webpack-dev-server": "4.13.1",
+    "xhr": "^2.6.0",
+    "ynab": "1.47.0"
   }
 }
