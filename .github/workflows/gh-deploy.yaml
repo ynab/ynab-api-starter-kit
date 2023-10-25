@@ -5,7 +5,7 @@
 name: Deploy to GitHub Pages
 on:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   deploy:
     runs-on: ubuntu-latest
