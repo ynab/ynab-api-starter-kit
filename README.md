@@ -1,6 +1,6 @@
 # YNAB API Starter Kit
 
-Do you want to build a web app with the [YNAB API](https://api.youneedabudget.com/), but are not sure how to get started?
+Do you want to build a web app with the [YNAB API](https://api.ynab.com/), but are not sure how to get started?
 
 Try this YNAB API Starter Kit!
 
@@ -10,7 +10,7 @@ Without **any** prior knowledge, it allows you to build:
 - makes requests to the YNAB API through OAuth,
 - and is entirely compiled on GitHub, and hosted on GitHub Pages!
 
-[![Works with YNAB](./public/works_with_ynab.svg)](https://api.youneedabudget.com/)
+[![Works with YNAB](./public/works_with_ynab.svg)](https://api.ynab.com/)
 
 ## Live Demo
 
@@ -38,10 +38,10 @@ OAuth is the framework through which YNAB can share access to a user's data safe
 
 Every YNAB app requires their own OAuth Application credentials.
 
-1. You will need a YNAB account, and [to be logged in](https://app.youneedabudget.com/users/authentication).
+1. You will need a YNAB account, and [to be logged in](https://app.ynab.com/users/authentication).
 
-2. Go to the [YNAB Developer Settings](https://app.youneedabudget.com/settings/developer)
-   and click [New Application](https://app.youneedabudget.com/oauth/applications/new).
+2. Go to the [YNAB Developer Settings](https://app.ynab.com/settings/developer)
+   and click [New Application](https://app.ynab.com/oauth/applications/new).
 
 3. The name, description, website URL and privacy policy URL are all information that will be provided to users for them to determine whether to trust your app (or not!); but these will not affect the operation of your app.
 
@@ -53,7 +53,7 @@ Every YNAB app requires their own OAuth Application credentials.
 
 4. Check that you acknowledge the terms of service (after reading them!), and click "Save Application."
 
-   You'll see your Client ID, Client Secret and Redirect URI(s) (you can [read more about these concepts in YNAB's documentation](https://api.youneedabudget.com/#outh-applications)). For this project, we will be using the _Implicit Grant Flow_ and will only need the Client ID.
+   You'll see your Client ID, Client Secret and Redirect URI(s) (you can [read more about these concepts in YNAB's documentation](https://api.ynab.com/#outh-applications)). For this project, we will be using the _Implicit Grant Flow_ and will only need the Client ID.
 
 5. Copy and paste the Client ID and URL to your app into the `src/config.json` file of the repository (you can edit them on GitHub directly):
 
@@ -64,7 +64,7 @@ Every YNAB app requires their own OAuth Application credentials.
    }
    ```
 
-**NOTE:** At this point, your app will only be able to access the YNAB API in [Restricted Mode](https://api.youneedabudget.com/#oauth-restricted-mode): This means you can access it an unlimited number of times, but other users will only be able to authenticate a combined total of 25 times, before you will need to write api@youneedabudget.com to reset your quota or get your app officially approved.
+**NOTE:** At this point, your app will only be able to access the YNAB API in [Restricted Mode](https://api.ynab.com/#oauth-restricted-mode): This means you can access it an unlimited number of times, but other users will only be able to authenticate a combined total of 25 times, before you will need to write api@ynab.com to reset your quota or get your app officially approved.
 
 ### Step 3: Wait for GitHub Actions to deploy app to GitHub Pages
 
@@ -78,7 +78,7 @@ You can also read more about how to see [the output of GitHub Actions](https://d
 
 ## Code Architecture of the App
 
-Now that you have a sandbox to explore the YNAB API, you will want to check out the [YNAB API Documentation](https://api.youneedabudget.com/) for more information on what can be done.
+Now that you have a sandbox to explore the YNAB API, you will want to check out the [YNAB API Documentation](https://api.ynab.com/) for more information on what can be done.
 
 Also, although this project happens to use the [Vue.js](https://vuejs.org/) front-end framework, it is not required. Feel free to use whatever framework or libraries you prefer (popular alternatives to Vue.js include React and Angular).
 
@@ -181,7 +181,7 @@ However, it is very easy to serve this app from its own custom domain name. Alth
 
 4. Edit the file `src/config.json` to likewise edit the Redirect URL to the domain name. (If you forget this step, your app will not redirect users to the right place after authorizing connection to YNAB.)
 
-5. Go to the [YNAB Developer Settings](https://app.youneedabudget.com/settings/developer), as you need to add the new Redirect URL that uses your custom domain. (If you forget this step, YNAB will not allow the redirection to your app to proceed, and will produce an error message.)
+5. Go to the [YNAB Developer Settings](https://app.ynab.com/settings/developer), as you need to add the new Redirect URL that uses your custom domain. (If you forget this step, YNAB will not allow the redirection to your app to proceed, and will produce an error message.)
 
 ## License
 

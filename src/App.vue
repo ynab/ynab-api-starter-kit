@@ -24,12 +24,12 @@
             <a href="https://github.com/jlumbroso/ynab-api-starter-kit#step-2-obtain-an-oauth-client-id-so-the-app-can-access-the-ynab-api">read
               detailed instructions in the README.md</a>. Essentially:</p>
           <ul>
-            <li>Make sure to be logged into your YNAB account, go to your <a href="https://app.youneedabudget.com/settings/developer" target="_blank" rel="noopener noreferrer">YNAB Developer Settings</a> and create a new OAuth Application.</li>
+            <li>Make sure to be logged into your YNAB account, go to your <a href="https://app.ynab.com/settings/developer" target="_blank" rel="noopener noreferrer">YNAB Developer Settings</a> and create a new OAuth Application.</li>
             <li>Enter the URL of this project as a Redirect URI (in addition to the existing three options), then "Save Application."</li>
             <li>Copy your Client ID and Redirect URI into the <em>src/config.json</em> file of your project.</li>
             <li>Then build your amazing app!</li>
           </ul>
-          <p>If you have any questions please reach out to us at <strong>api@youneedabudget.com</strong>.</p>
+          <p>If you have any questions please reach out to us at <strong>api@ynab.com</strong>.</p>
           <p>&nbsp;</p>
 
           <div class="form-group">
@@ -126,10 +126,10 @@ export default {
       });
     },
     // This builds a URI to get an access token from YNAB
-    // https://api.youneedabudget.com/#outh-applications
+    // https://api.ynab.com/#outh-applications
     authorizeWithYNAB(e) {
       e.preventDefault();
-      const uri = `https://app.youneedabudget.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
+      const uri = `https://app.ynab.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
       location.replace(uri);
     },
     // Method to find a YNAB token
