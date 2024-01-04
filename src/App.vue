@@ -21,7 +21,7 @@
           <h1 class="display-4">Congrats!</h1>
           <p class="lead">You have successfully initialized a new YNAB API Application!</p>
           <p>The next step is the OAuth configuration, you can
-            <a href="https://github.com/jlumbroso/ynab-api-starter-kit#step-2-obtain-an-oauth-client-id-so-the-app-can-access-the-ynab-api">read
+            <a href="https://github.com/ynab/ynab-api-starter-kit#step-2-obtain-an-oauth-client-id-so-the-app-can-access-the-ynab-api">read
               detailed instructions in the README.md</a>. Essentially:</p>
           <ul>
             <li>Make sure to be logged into your YNAB account, go to your <a href="https://app.ynab.com/settings/developer" target="_blank" rel="noopener noreferrer">YNAB Developer Settings</a> and create a new OAuth Application.</li>
