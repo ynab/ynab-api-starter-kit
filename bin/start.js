@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const cpr = require('cpr');
-const chalk = require('chalk');
-const spawn = require('child_process').spawn;
+import * as os from "os";
+import * as path from "path";
+import cpr from "cpr";
+import chalk from "chalk";
+import { spawn } from "child_process";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 process.title = 'ynab-api-starter-kit';
 const TO = path.resolve(process.cwd(), process.argv[2] || 'ynab-api-starter-kit');
