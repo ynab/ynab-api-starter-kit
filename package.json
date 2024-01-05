@@ -2,7 +2,7 @@
   "name": "ynab-api-starter-kit",
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "To quickly get started building an App with the YNAB API.",
   "bin": "bin/start.js",
   "scripts": {
@@ -10,12 +10,12 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "cpr": "^3.0.1",
     "vue": "^3.4.5",
     "ynab": "^2.2.0"
   },
   "devDependencies": {
-    "chalk": "^5.3.0",
-    "cpr": "^3.0.1",
     "css-loader": "^6.8.1",
     "vue-loader": "^17.4.2",
     "webpack": "^5.89.0",
