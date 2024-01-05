@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check-out the content of the repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Install Node.js"
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: 12
+          node-version: 20
       - name: "Install dependencies, then build output JS bundle"
         run: |
           npm install

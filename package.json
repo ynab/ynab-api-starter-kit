@@ -9,16 +9,15 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production --progress"
   },
+  "dependencies": {
+    "vue": "^3.4.5",
+    "ynab": "^2.2.0"
+  },
   "devDependencies": {
     "css-loader": "^6.8.1",
-    "vue": "^3.4.5",
     "vue-loader": "^17.4.2",
-    "vue-server-renderer": "^2.7.16",
-    "vue-template-compiler": "^2.7.16",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "xhr": "^2.6.0",
-    "ynab": "^2.2.0"
+    "webpack-dev-server": "^4.15.1"
   }
 }
