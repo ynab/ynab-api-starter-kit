@@ -13,7 +13,7 @@ const FROM = path.resolve(__dirname, '..');
 
 const files = [
   'src',
-  'index.html',
+  'public',
   'package.json',
   'README.md',
   'webpack.config.js'
