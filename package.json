@@ -2,7 +2,7 @@
   "name": "ynab-api-starter-kit",
   "author": "You Need a Budget, LLC",
   "license": "Apache-2.0",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "To quickly get started building an App with the YNAB API.",
   "bin": "bin/start.js",
   "scripts": {
