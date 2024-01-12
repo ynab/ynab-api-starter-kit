@@ -78,6 +78,8 @@ You can also read more about how to see [the output of GitHub Actions](https://d
 
 > If you get the error: Action failed with "not found deploy key or tokens" you will need to enabled read and write permissions for the github workflow. In your repository, go to Settings > Actions > General. Then scroll down to Workflow permissions. Select Read and write permissions then click Save.
 
+> If you get a 404 after deploying, you may need to configure GitHub Pages. Go into your repository Settings, then Pages, then under "Build and deployment" select "Deploy from a branch", then select the "gh-pages" branch and root folder, finally click Save.
+
 ## Code Architecture of the App
 
 Now that you have a sandbox to explore the YNAB API, you will want to check out the [YNAB API Documentation](https://api.ynab.com/) for more information on what can be done.
