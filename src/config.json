@@ -1,4 +1,12 @@
 {
-  "clientId": "a56948bc5fe6e80c1a241151611a53350518c119ea413de4375694ebebbd68e0",
-  "redirectUri": "https://ynab.github.io/ynab-api-starter-kit/"
+  "clientId": "9VDrBjg4RcZo83q7JTdz039kVLMa3u3oRmsFOf5QHOU",
+  "redirectUris": [
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "http://localhost:8082",
+    "http://localhost:8083",
+    "http://localhost:8084",
+    "http://localhost:8085",
+    "http://127.0.0.1"
+  ]
 }
