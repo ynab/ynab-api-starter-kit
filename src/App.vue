@@ -126,7 +126,7 @@ export default {
       });
     },
     // This builds a URI to get an access token from YNAB
-    // https://api.ynab.com/#outh-applications
+    // https://api.ynab.com/#oauth-applications
     authorizeWithYNAB(e) {
       e.preventDefault();
       const uri = `https://app.ynab.com/oauth/authorize?client_id=${this.ynab.clientId}&redirect_uri=${this.ynab.redirectUri}&response_type=token`;
