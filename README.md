@@ -189,12 +189,8 @@ However, it is very easy to serve this app from its own custom domain name. Alth
 
 ## License
 
-Copyright (c) 2019 You Need A Budget, LLC.
+Copyright (c) 2019 YNAB
 
 Copyright (c) 2022 Jérémie Lumbroso.
 
 Licensed under the Apache-2.0 license.
-
-```
-
-```
