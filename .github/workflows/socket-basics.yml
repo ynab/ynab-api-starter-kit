@@ -11,5 +11,4 @@ jobs:
     # Plus, the shared action does use pinned dependencies, and so will be updated fairly often.  When we do that, we do not
     # want to have to update the sha in every repo that uses this shared action, before such updates apply.
     uses: ynab/shared-actions/.github/workflows/socket-basics.yml@main
-    secrets:
-      SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
+    secrets: inherit
