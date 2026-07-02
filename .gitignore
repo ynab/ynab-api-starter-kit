@@ -34,3 +34,5 @@ landingPageBundle.js.map
 identifiers.js
 server/ssl
 todo.txt
+.socket-scans/
+.socket.facts.json

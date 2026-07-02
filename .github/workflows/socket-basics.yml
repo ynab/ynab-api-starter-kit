@@ -1,0 +1,14 @@
+name: Socket Basics Security Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  socket-basics-security-scan:
+    # We intentionally run this shared action from @main, not from a pinned sha
+    # this is because we control the shared-actions repo, so there is not a significant risk of malicious changes being pushed.
+    # Plus, the shared action does use pinned dependencies, and so will be updated fairly often.  When we do that, we do not
+    # want to have to update the sha in every repo that uses this shared action, before such updates apply.
+    uses: ynab/shared-actions/.github/workflows/socket-basics.yml@main
+    secrets: inherit
