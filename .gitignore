@@ -36,4 +36,3 @@ server/ssl
 todo.txt
 .socket-scans/
 .socket.facts.json
-.socket-basics-merged.json
