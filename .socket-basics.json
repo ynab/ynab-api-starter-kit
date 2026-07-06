@@ -1,0 +1,3 @@
+{
+  "javascript_disabled_rules": "js-ssrf-vulnerability"
+}
