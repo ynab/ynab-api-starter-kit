@@ -23,7 +23,7 @@ jobs:
           cp -pR ./dist ./public
       - name: Deploy to 'gh-pages' branch
         id: deploy-with-token
-        uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
