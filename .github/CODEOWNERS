@@ -1,0 +1,8 @@
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
+#
+# Order is important; the last matching pattern takes the most precedence.
+
+# Paths that Dependabot PRs can touch
+/package.json @ynab/full-stack
+/package-lock.json @ynab/full-stack
+/.github/ @ynab/full-stack
