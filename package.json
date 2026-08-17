@@ -14,7 +14,7 @@
     "chalk": "^6.0.0",
     "cpr": "^3.0.1",
     "vue": "^3.4.5",
-    "ynab": "^2.2.0"
+    "ynab": "^4.5.0"
   },
   "devDependencies": {
     "css-loader": "^7.1.4",
