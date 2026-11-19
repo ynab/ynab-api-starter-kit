@@ -14,7 +14,7 @@ Without **any** prior knowledge, it allows you to build:
 
 ## Live Demo
 
-The starter project invites a user to authorize YNAB to share information with the project, provides a choice of budget, then displays all the transactions. It's probably not very useful, but it demonstrates several key features involved in building a YNAB web app.
+The starter project invites a user to authorize YNAB to share information with the project, provides a choice of plan, then displays all the transactions. It's probably not very useful, but it demonstrates several key features involved in building a YNAB web app.
 
 View a [live demo](https://ynab.github.io/ynab-api-starter-kit/) of what this project will start off looking like or take a look below.
 
@@ -90,11 +90,11 @@ Also, although this project happens to use the [Vue.js](https://vuejs.org/) fron
 
 In the script portion of this page, you can see how to build an OAuth URI to obtain an access token for the API.
 
-It also has some examples on retrieving budgets and transactions.
+It also has some examples on retrieving plans and transactions.
 
 ### [`src/Transactions.vue`](https://github.com/ynab/ynab-api-starter-kit/blob/gh-pages/src/components/Transactions.vue)
 
-This displays all the transactions when you've got them. It also has an example of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that YNAB uses into the currency format of the budget.
+This displays all the transactions when you've got them. It also has an example of using `utils.convertMilliUnitsToCurrencyAmount` to convert the milliunits that YNAB uses into the currency format of the plan.
 
 ## Local Development
 
