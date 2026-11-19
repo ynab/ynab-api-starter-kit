@@ -103,8 +103,8 @@ export default {
     getBudgets() {
       this.loading = true;
       this.error = null;
-      this.api.budgets.getBudgets().then((res) => {
-        this.budgets = res.data.budgets;
+      this.api.plans.getPlans().then((res) => {
+        this.budgets = res.data.plans;
       }).catch((err) => {
         this.error = err.error.detail;
       }).finally(() => {
