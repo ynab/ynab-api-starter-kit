@@ -39,13 +39,13 @@
           </div>
         </form>
 
-        <!-- Otherwise if we have a token, show the budget select -->
-        <Budgets v-else-if="!budgetId" :budgets="budgets" :selectBudget="selectBudget" />
+        <!-- Otherwise if we have a token, show the plan select -->
+        <Plans v-else-if="!planId" :plans="plans" :selectPlan="selectPlan" />
 
-        <!-- If a budget has been selected, display transactions from that budget -->
+        <!-- If a plan has been selected, display transactions from that plan -->
         <div v-else>
           <Transactions :transactions="transactions" />
-          <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
+          <button class="btn btn-info" @click="planId = null">&lt; Select Another Plan</button>
         </div>
 
       </div>
@@ -65,7 +65,7 @@ import config from './config.json';
 // Import Our Components to Compose Our App
 import Nav from './components/Nav.vue';
 import Footer from './components/Footer.vue';
-import Budgets from './components/Budgets.vue';
+import Plans from './components/Plans.vue';
 import Transactions from './components/Transactions.vue';
 
 export default {
@@ -80,42 +80,42 @@ export default {
       },
       loading: false,
       error: null,
-      budgetId: null,
-      budgets: [],
+      planId: null,
+      plans: [],
       transactions: [],
     }
   },
   // When this component is created, check whether we need to get a token,
-  // budgets or display the transactions
+  // plans or display the transactions
   created() {
     this.ynab.token = this.findYNABToken();
     if (this.ynab.token) {
       this.api = new ynab.api(this.ynab.token);
-      if (!this.budgetId) {
-        this.getBudgets();
+      if (!this.planId) {
+        this.getPlans();
       } else {
-        this.selectBudget(this.budgetId);
+        this.selectPlan(this.planId);
       }
     }
   },
   methods: {
-    // This uses the YNAB API to get a list of budgets
-    getBudgets() {
+    // This uses the YNAB API to get a list of plans
+    getPlans() {
       this.loading = true;
       this.error = null;
-      this.api.budgets.getBudgets().then((res) => {
-        this.budgets = res.data.budgets;
+      this.api.plans.getPlans().then((res) => {
+        this.plans = res.data.plans;
       }).catch((err) => {
         this.error = err.error.detail;
       }).finally(() => {
         this.loading = false;
       });
     },
-    // This selects a budget and gets all the transactions in that budget
-    selectBudget(id) {
+    // This selects a plan and gets all the transactions in that plan
+    selectPlan(id) {
       this.loading = true;
       this.error = null;
-      this.budgetId = id;
+      this.planId = id;
       this.transactions = [];
       this.api.transactions.getTransactions(id).then((res) => {
         this.transactions = res.data.transactions;
@@ -162,7 +162,7 @@ export default {
   components: {
     Nav,
     Footer,
-    Budgets,
+    Plans,
     Transactions
   }
 }
